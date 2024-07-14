@@ -1,12 +1,21 @@
 
 import sys
+from .classes import game
+
 def newGame():
-     print('\n\n\t')
+    current_game = game.Game()
+    gameStatus = False
+
+    while gameStatus == False:
+        current_game.baseMenu()
+        gameStatus = current_game.getGameStatus()
+        
+
 def willPlay(case):
             if case == 1:
                 newGame()
             elif case == 2:
-                print('leaving now.....')
+                print('leaving now.....\n\n')
                 exit()
 
 def programStart():
