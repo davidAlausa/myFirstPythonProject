@@ -14,5 +14,7 @@ class Monster:
 
     def setLives(this, newValue):
         this.lives = newValue
-
+    
+    def resetLives(this):
+        this.lives = 3
         
