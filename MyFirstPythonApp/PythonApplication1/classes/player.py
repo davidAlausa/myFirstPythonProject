@@ -12,7 +12,7 @@ class Player:
         return this.lives
     
     def setLives(this, change):
-        this.lives += change
+        this.lives = change
         this.checkLives()
 
         

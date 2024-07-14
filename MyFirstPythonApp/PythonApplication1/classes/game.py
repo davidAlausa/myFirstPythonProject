@@ -1,5 +1,6 @@
 import random
 import time
+import string
 from .hotel import Hotel
 from .monster import Monster
 from .player import Player
@@ -22,9 +23,16 @@ class Game:
         this.CGREEN  = '\33[32m' #GREEN
         this.CBLUE   = '\33[34m'    #BLUE
         this.CVIOLET = '\33[35m'    #VIOLET
+        this.CBLINK    = '\33[5m' #BLINK
     def getGameStatus(this):
         return this.isOver
     
+    def checkEndGameStatus(this):
+        if this.player.getLives() > 0 and this.keyInventoryCount == 3 and this.hotel.getFloor() == 1:
+            return True
+        else:
+            return False
+        
     def setGameStatus(this, newValue):
         this.isOver = newValue
     
@@ -43,31 +51,29 @@ class Game:
         return True
 
     def baseMenu(this):
+        if this.keyInventoryCount == 3 and this.hotel.getFloor() == 1:
+            this.isOver = True
+            return
 
         CGREEN  = '\33[32m' #GREEN
-        functionFailure = True
 
-        while functionFailure == True:
-            print('\n\n\tYou are on FLOOR ' + str(this.hotel.getFloor()))
-            elevatorChoice = input('\n\n\tElevator: ' +this.CGREEN + '"Pick. a. floor. bzzrttt"\t' + this.CEND)
+        print('\n\n\tYou are on FLOOR ' + str(this.hotel.getFloor()))
+        elevatorChoice = input('\n\n\tElevator: ' +this.CGREEN + '"Pick. a. floor. bzzrttt"\t' + this.CEND)
+        try:
+            elevatorChoice = int(elevatorChoice)
 
-            try:
-                elevatorChoice = int(elevatorChoice)
+            while not this.validateElevatorFloor(elevatorChoice):
+                elevatorChoice = int(input('\n\t'))
+            
+            this.checkElevatorChoice(elevatorChoice)
 
-                while not this.validateElevatorFloor(elevatorChoice):
-                    elevatorChoice = int(input('\n\t'))
+            this.monster.moveMonster()
 
-                functionFailure == False
-
-                this.checkElevatorChoice(elevatorChoice)
-
+            while this.hotel.getFloor == this.monster.floorLevel:
                 this.monster.moveMonster()
 
-                while this.hotel.getFloor == this.monster.floorLevel:
-                    this.monster.moveMonster()
-
-            except ValueError:
-                print("\n\n---*Invalid input. Please enter a valid integer*---")
+        except ValueError:
+            print("\n\n---*Invalid input. Please enter a valid integer*---")
 
 
     def keyFound(this):
@@ -78,6 +84,7 @@ class Game:
 
             print ('Good Luck!')
 
+            this.monster.moveMonster()
             this.key = random.randint(2,5)
             if this.key == this.monster.floorLevel:
                 while this.key == this.monster.floorLevel:
@@ -89,9 +96,10 @@ class Game:
 
     def monsterEvent(this):
         
+        this.monster.resetLives()
 
         print(this.CRED + '\n\n\tMONSTER: muhhaahhahahHAHAHAHHAHAH' + this.CEND)
-        print("\n\n\tIt's the " + this.CRED + "MONSTER" + this.CEND +"!\n\n\t\t Enter '1' to ATTACK or Enter '2' to Defend")
+        print("\n\n\tIt's the " + this.CRED + "MONSTER" + this.CEND +"!\n\n\t\t Enter the correct key to win!!")
         print('\n\n THE FIGHT STARTS IN 3...')
         time.sleep(2)
         print('\n2...')
@@ -101,7 +109,7 @@ class Game:
         # Insert Monster Fighting Functionality
         while this.monster.getLives() > 0 and this.player.getLives() > 0:
             action = random.randint(1, 3)
-            RandomActionButton = random.randint(0,9)
+            RandomActionButton = random.choice(string.ascii_letters + string.digits + string.punctuation)
             print("\n\nThe " + this.CRED + "MONSTER " + this.CEND + ".....")
             time.sleep(2)
 
@@ -131,17 +139,49 @@ class Game:
 
         if this.player.getLives() == 0:
             print(this.CRED + "\n\nMONSTER: HAHAHAHHAHAH. YOUR WEAKER THAN I THOUGHT" + this.CEND)
-            this.isOver = True
+            this.setGameStatus(True)
 
         elif this.monster.getLives() == 0:
             print(this.CRED + "\n\nMONSTER: Ouch... That kinda hurt..." + this.CEND)
-            print("\nYou beat the monster with " + str(this.player.getLives()) + " left. Be careful!!!")
+            print("\nYou beat the monster with " + str(this.player.getLives()) + " lives left. Be careful!!!")
+
+            this.monster.moveMonster()
+            if this.monster.floorLevel == this.key:
+                while this.monster.floorLevel == this.key:
+                    this.monster.moveMonster()
+
 
 
 
 
     def emptyFloor(this):
-        print('still wip')
+        event = random.randint(1,5)
+        
+        if event == 1:
+            print('\n\n\t"The lift doors slide open to reveal... nothing! Well, except for a lonely dust bunny contemplating its existence."')
+            time.sleep(2)
+        elif event == 2:
+            print('\n\n\t"The lift opens to an empty floor. You hear the distant echo of your own disappointment."')
+            time.sleep(2)
+        elif event == 3:
+            print('\n\n\t"You step out to... an empty floor. Perhaps the universe is telling you to try again."')
+            time.sleep(2)
+        elif event == 4:
+            print('\n\n\t"As the door opens you find a '+this.CGREEN+'1UP MARIO MUSHROOM '+this.CEND+'on the floor"')
+            time.sleep(3)
+            print('\n\n\t"You question the creator\'s lack of originality as you ingest the mushroom"')
+            time.sleep(3)
+            if not this.player.getLives() > 2:
+                this.player.setLives(this.player.getLives() + 1)
+            print(this.CGREEN + '\n\nYOU GAINED 1 LIFE. ' + str(this.player.getLives()) + ' lives remaining' + this.CEND)
+            time.sleep(2)
+            print('\n\n\t"tastes green...."')
+            time.sleep(2)
+
+        elif event == 5:
+            print(this.CRED + "\n\n\tMONSTER: ehheeheheh...... "+ this.CBLINK +" I CAN SMELL YOU....."+ this.CEND)
+            print('\n\n\t')
+            time.sleep(3)
 
     def checkElevatorChoice(this, choice):
         print('\n\n\tGoing to floor ' + str(choice )+ '. Opening door in:')

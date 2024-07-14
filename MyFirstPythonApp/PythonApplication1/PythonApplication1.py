@@ -9,7 +9,13 @@ def newGame():
     while gameStatus == False:
         current_game.baseMenu()
         gameStatus = current_game.getGameStatus()
+        #print('\n\n'+str(gameStatus)+'\n\n')
+
         
+    if current_game.checkEndGameStatus:
+         print('\n\n\tYAYYYY. You won with '+ str(current_game.player.getLives()) +' lives remaining!!!')
+    else:
+         print('\n\n\tOH NO! Yikes.... looks like the monster got you')
 
 def willPlay(case):
             if case == 1:
