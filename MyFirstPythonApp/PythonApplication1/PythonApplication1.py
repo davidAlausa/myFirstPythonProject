@@ -12,12 +12,13 @@ def newGame():
         #print('\n\n'+str(gameStatus)+'\n\n')
 
         
-    if current_game.checkEndGameStatus:
+    if current_game.checkEndGameStatus():
          print('\n\n\tYAYYYY. You won with '+ str(current_game.player.getLives()) +' lives remaining!!!')
     else:
-         print('\n\n\tOH NO! Yikes.... looks like the monster got you')
+         print('\n\n\tOH NO! Yikes.... looks like the monster got you.')
 
 def willPlay(case):
+            
             if case == 1:
                 newGame()
             elif case == 2:
@@ -38,8 +39,12 @@ def programStart():
                 print('\n\tThis is not a valid option.... try again')
                 case = int(input('\n\nEnter 1 to play or 2 to exit:\t'))
     
-            willPlay(case)
-            exit()
+            if case == 1:
+                newGame()
+            elif case == 2:
+                print('leaving now.....\n\n')
+                exit()
+                
         except ValueError:
             print("\n\n---*Invalid input. Please enter a valid integer*---")
          
