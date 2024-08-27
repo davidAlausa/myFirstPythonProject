@@ -14,7 +14,11 @@ class introScreen():
 
     #updates SPRITES
     def update(self):
-        self.introScreenNEWGAME.update(self)
+        NEWGAME_PRESSED = self.introScreenNEWGAME.update(self)
+        if NEWGAME_PRESSED:
+            return 'P'
+        else:
+            return 'I'
     
     #draws LEVEL to screen
     def draw(self):
@@ -23,5 +27,6 @@ class introScreen():
     
     #will be called fom GAME loop
     def run(self):
-        self.update()
+        GAME_PHASE = self.update()
         self.draw()
+        return GAME_PHASE

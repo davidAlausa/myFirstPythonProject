@@ -1,6 +1,8 @@
 import pygame
+import moviepy.editor
 from Config import *
 from introScreen import introScreen
+from elevatorScreen import elevatorScreen
 
 #initialising PYGAME
 pygame.init()
@@ -12,6 +14,7 @@ pygame.display.set_caption('MonsterHotel')
 
 #initialising VARIABLES
 intrscrn = introScreen(displaySurface)
+elvtrscrn = elevatorScreen(displaySurface)
 isGameRunning = True
 gmPHASE = 'I'
 
@@ -24,15 +27,19 @@ while isGameRunning:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 isGameRunning = False
+
     
     #deciding GAME'S PHASE
     if gmPHASE == 'I':
-        intrscrn.run()
-
-        
+        gmPHASE = intrscrn.run()
+    elif gmPHASE == 'P':
+        video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'is_to_hs.mov')
+        video.preview()
+        gmPHASE = elvtrscrn.run()
     #refreshing DISPLAY
     pygame.display.flip()
     clock.tick(60)
 
 #closing GAME
 pygame.quit()
+
