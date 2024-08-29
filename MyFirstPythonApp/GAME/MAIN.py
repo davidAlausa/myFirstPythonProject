@@ -1,5 +1,5 @@
 import pygame
-import moviepy.editor
+import moviepy.editor 
 from Config import *
 from introScreen import introScreen
 from elevatorScreen import elevatorScreen
@@ -33,7 +33,7 @@ while isGameRunning:
     if gmPHASE == 'I':
         gmPHASE = intrscrn.run()
     elif gmPHASE == 'P':
-        video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'is_to_hs.mov')
+        video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'is_to_hs.mp4', audio= False)
         video.preview()
         gmPHASE = elvtrscrn.run()
     #refreshing DISPLAY
