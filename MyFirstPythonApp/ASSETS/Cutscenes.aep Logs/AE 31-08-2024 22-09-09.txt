@@ -1,0 +1,67 @@
+Adobe After Effects v18.0.1 Windows 64 render log for project “Cutscenes.aep”
+
+Rendering started on 31/08/2024 at 22:09:09
+
+  31/08/2024 22:09:09: Starting composition “gs_FLOORLEVEL_2”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_FLOORLEVEL_2_[#####].png    31/08/2024 22:09:09: Finished composition “gs_FLOORLEVEL_2”.
+
+
+  31/08/2024 22:09:09: Starting composition “gs_FLOORLEVEL_3”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_FLOORLEVEL_3_[#####].png    31/08/2024 22:09:09: Finished composition “gs_FLOORLEVEL_3”.
+
+
+  31/08/2024 22:09:09: Starting composition “gs_FLOORLEVEL_4”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_FLOORLEVEL_4_[#####].png    31/08/2024 22:09:09: Finished composition “gs_FLOORLEVEL_4”.
+
+
+  31/08/2024 22:09:09: Starting composition “gs_FLOORLEVEL_5”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_FLOORLEVEL_5_[#####].png    31/08/2024 22:09:09: Finished composition “gs_FLOORLEVEL_5”.
+
+
+  31/08/2024 22:09:09: Starting composition “gs_FLOORLEVEL_G”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_FLOORLEVEL_G_[#####].png    31/08/2024 22:09:10: Finished composition “gs_FLOORLEVEL_G”.
+
+
+  31/08/2024 22:09:10: Starting composition “gs_KEYS_1”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_KEYS_1_[#####].png    31/08/2024 22:09:10: Finished composition “gs_KEYS_1”.
+
+
+  31/08/2024 22:09:10: Starting composition “gs_KEYS_2”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_KEYS_2_[#####].png    31/08/2024 22:09:10: Finished composition “gs_KEYS_2”.
+
+
+  31/08/2024 22:09:10: Starting composition “gs_KEYS_3”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_KEYS_3_[#####].png    31/08/2024 22:09:10: Finished composition “gs_KEYS_3”.
+
+
+  31/08/2024 22:09:10: Starting composition “gs_LIVES_1”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_LIVES_1_[#####].png    31/08/2024 22:09:10: Finished composition “gs_LIVES_1”.
+
+
+  31/08/2024 22:09:11: Starting composition “gs_LIVES_2”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_LIVES_2_[#####].png    31/08/2024 22:09:11: Finished composition “gs_LIVES_2”.
+
+
+  31/08/2024 22:09:11: Starting composition “gs_LIVES_3”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_LIVES_3_[#####].png    31/08/2024 22:09:11: Finished composition “gs_LIVES_3”.
+
+
+  31/08/2024 22:09:11: Starting composition “gs_TITLES”.
+
+  Output To: C:\Users\Dami Alausa\source\repos\myFirstPythonProject\MyFirstPythonApp\ASSETS\gs_TITLES_[#####].png    31/08/2024 22:09:11: Finished composition “gs_TITLES”.
+
+
+  Total Time Elapsed: 2 Seconds
+Log closed on 31/08/2024 at 22:09:11
+
