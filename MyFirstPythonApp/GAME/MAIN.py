@@ -1,10 +1,10 @@
 import pygame
 import moviepy.editor 
-from moviepy.video.fx.all import resize
 from Config import *
 from introScreen import introScreen
 from elevatorScreen import elevatorScreen
 from FUNCTIONALITY import Game
+from event import event
 
 #initialising PYGAME
 pygame.init()
@@ -22,6 +22,7 @@ isGameRunning = True
 gmPHASE = 'I'
 video_played = False
 flrprssd = (False,1,1)
+evnt = event(game)
 
 #LOOP
 while isGameRunning:
@@ -55,11 +56,17 @@ while isGameRunning:
                     current = current-1
                 else:
                     current = current+1
+            
+            newfloorlevel = flrprssd[1] 
+
+            game.setHotelFloor(newfloorlevel)
             video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'e_Countdown_'+str(current)+'_resized.mp4', audio= False)
             video.preview()
             
             video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'e_BACKGROUND_DOORSOPEN_resized.mp4', audio= False)
             video.preview()
+
+            evnt.checkElevatorChoice(newfloorlevel)
 
 
 
@@ -68,5 +75,5 @@ while isGameRunning:
     clock.tick(60)
 
 #closing GAME
-pygame.quit()
+pygame.quit()   
 

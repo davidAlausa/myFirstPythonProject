@@ -76,7 +76,6 @@ class Game:
         except ValueError:
             print("\n\n---*Invalid input. Please enter a valid integer*---")
 
-
     def keyFound(this):
         this.keyInventoryCount +=1 
         print('\n\n\tYou found a Key! You now have ' + str(this.keyInventoryCount) + ' keys in your possession.')
@@ -152,59 +151,17 @@ class Game:
                 while this.monster.floorLevel == this.key:
                     this.monster.moveMonster()
 
-
-
-
-
-    def emptyFloor(this):
-        event = random.randint(1,5)
-        
-        if event == 1:
-            print('\n\n\t"The lift doors slide open to reveal... nothing! Well, except for a lonely dust bunny contemplating its existence."')
-            time.sleep(2)
-        elif event == 2:
-            print('\n\n\t"The lift opens to an empty floor. You hear the distant echo of your own disappointment."')
-            time.sleep(2)
-        elif event == 3:
-            print('\n\n\t"You step out to... an empty floor. Perhaps the universe is telling you to try again."')
-            time.sleep(2)
-        elif event == 4:
-            print('\n\n\t"As the door opens you find a '+this.CGREEN+'1UP MARIO MUSHROOM '+this.CEND+'on the floor"')
-            time.sleep(2)
-            print('\n\n\t"You question the creator\'s lack of originality as you ingest the mushroom"')
-            time.sleep(2)
-            if not this.player.getLives() > 2:
-                this.player.setLives(this.player.getLives() + 1)
-                print(this.CGREEN + '\n\nYOU GAINED 1 LIFE. ' + str(this.player.getLives()) + ' lives remaining' + this.CEND)
-                time.sleep(1.5)
-                print('\n\n\t"tastes green...."')
-            else:
-                print('\n\n\t"You instantly feel sick... Maybe you should lay off the mushrooms for a while..."')
-            time.sleep(1)
-
-        elif event == 5:
-            print(this.CRED + "\n\n\tMONSTER: ehheeheheh...... "+ this.CBLINK +" I CAN SMELL YOU....."+ this.CEND)
-            print('\n\n\t')
-            time.sleep(2)
-
-    def checkElevatorChoice(this, choice):
-        print('\n\n\tGoing to floor ' + str(choice )+ '. Opening door in:')
-        print('\n\t\t3...')
-        time.sleep(1.5)
-        print('\n\t\t2....')
-        time.sleep(1.5)
-        print('\n\t\t1...')   
-        time.sleep(1.5)
-        this.hotel.setFloor(choice)
-
-        if choice == this.monster.floorLevel:
-            this.monsterEvent()
-        
-        elif choice == this.key:
-            this.keyFound()
-        
-        else:
-            this.emptyFloor()
-
     def getKeyInventoryCount(this):
         return this.keyInventoryCount
+    
+    def setHotelFloor(this, newfloorlevel):
+        this.hotel.setFloor(newfloorlevel)
+
+    def getHotelFloor(this):
+        return this.hotel.getFloor()
+    
+    def getMonsterFloorLevel(this):
+        return this.monster.floorLevel
+
+    def getKeyFloorLevel(this):
+        return this.key

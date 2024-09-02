@@ -22,7 +22,6 @@ class elevatorScreen():
         floorPRESSED = self.elevatorScreenBackground.update()
         keys = pygame.key.get_pressed()
         if keys[pygame.K_TAB]:
-            print("TAB key is pressed")
             self.showGameStatus = True
         else:
             self.showGameStatus = False
@@ -36,7 +35,6 @@ class elevatorScreen():
     def draw(self):
         self.elevatorScreenBackground.draw(self.displaySurface)
         if self.showGameStatus:
-            print("Drawing game status")
             self.elevatorScreenGAMESTATUS.draw(self.displaySurface, self.game.getKeyInventoryCount(), self.game.player.getLives(), self.game.hotel.getFloor())
         
     
