@@ -10,13 +10,12 @@ class Game:
         this.hotel = Hotel()
         this.monster = Monster()
         this.player = Player()
-        this.isOver = False
         this.key = random.randint(2,5)
         if this.key == this.monster.floorLevel:
             while this.key == this.monster.floorLevel:
                 this.key = random.randint(2,5)
 
-        this.keyInventoryCount = 1
+        this.keyInventoryCount = 0
 
         this.CRED = '\033[91m'      #RED
         this.CEND = '\033[0m'    #NORMAL
@@ -24,65 +23,31 @@ class Game:
         this.CBLUE   = '\33[34m'    #BLUE
         this.CVIOLET = '\33[35m'    #VIOLET
         this.CBLINK    = '\33[5m' #BLINK
+        this.isSameFloorPressed = False
 
-    def getGameStatus(this):
-        return this.isOver
-    
     def checkEndGameStatus(this):
         if this.player.getLives() > 0 and this.keyInventoryCount == 3 and this.hotel.getFloor() == 1:
             return True
+        elif this.player.getLives() == 0:
+            return True
         else:
             return False
-        
-    def setGameStatus(this, newValue):
-        this.isOver = newValue
     
     def validateElevatorFloor(this, proposedFloor):
-
         currentFloor = this.hotel.getFloor() 
-
         if proposedFloor == currentFloor:
-            print('\n\n\tElevator: ' +this.CGREEN + '"You are on this floor silly! bzzzrrttt!. Pick. a. floor:"\t' + this.CEND)
+            this.isSameFloorPressed = True
             return False
-        #######
         elif proposedFloor == 0 or proposedFloor == None:
             return False
 
         else:
+            this.isSameFloorPressed = False
             return True
-
-    def baseMenu(this):
-        if this.keyInventoryCount == 3 and this.hotel.getFloor() == 1:
-            this.isOver = True
-            return
-
-        CGREEN  = '\33[32m' #GREEN
-
-        print('\n\n\tYou are on FLOOR ' + str(this.hotel.getFloor()))
-        elevatorChoice = input('\n\n\tElevator: ' +this.CGREEN + '"Pick. a. floor. bzzrttt:"\t' + this.CEND)
-        try:
-            elevatorChoice = int(elevatorChoice)
-
-            while not this.validateElevatorFloor(elevatorChoice):
-                elevatorChoice = int(input('\n\t'))
-            
-            this.checkElevatorChoice(elevatorChoice)
-
-            this.monster.moveMonster()
-
-            while this.hotel.getFloor == this.monster.floorLevel:
-                this.monster.moveMonster()
-
-        except ValueError:
-            print("\n\n---*Invalid input. Please enter a valid integer*---")
 
     def keyFound(this):
         this.keyInventoryCount +=1 
-        print('\n\n\tYou found a Key! You now have ' + str(this.keyInventoryCount) + ' keys in your possession.')
-
         if this.keyInventoryCount != 3:
-
-            print ('\tGood Luck!')
 
             this.monster.moveMonster()
             this.key = random.randint(2,5)
@@ -90,9 +55,6 @@ class Game:
                 while this.key == this.monster.floorLevel:
                     this.key = random.randint(2,5)
 
-        elif this.keyInventoryCount == 3:
-
-            print ('\tThis means that you can escape!!! Head back to floor one NOW!!!')
 
     def monsterEvent(this):
         
@@ -165,3 +127,9 @@ class Game:
 
     def getKeyFloorLevel(this):
         return this.key
+    
+    def setIsSameFloorPressed(this, isSameFloorPressed):
+        this.isSameFloorPressed = isSameFloorPressed
+
+    def getIsSameFloorPressed(this):
+        return this.isSameFloorPressed

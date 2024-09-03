@@ -12,23 +12,31 @@ class event():
 
     
     def checkElevatorChoice(self, choice):
-        if choice == self.game.getMonsterFloorLevel():
+
+        if choice == self.game.getMonsterFloorLevel():  
             self.monsterEvent()
         
         elif choice == self.game.getKeyFloorLevel():
-           self.keyFound()
+            if self.game.getKeyInventoryCount()!=3:
+                self.keyFound()
+            else:
+                self.emptyFloor()
         
         else:
             self.emptyFloor()
 
+
     def emptyFloor(self):
         event = random.randint(1,5)
         
-        video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'f_NOTHING_'+ str(event) +'_resized.mp4', audio= False)
+        video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'f_NOTHING_'+ str(event) +'.mp4', audio= False)
         video.preview()
 
     def keyFound(self):
-        print('LOOOLL THE KEY WAS FOUND BUT THIS FUNCTIONALITY ISNT IMPLEMENTED YET')
+        video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'K_KEYFOUND.mp4', audio= False)
+        video.preview()
+        self.game.keyFound()
+
 
     def monsterEvent(self):
-        print('LOOOLL YOU ENCOUNTERED BUT THIS FUNCTIONALITY ISNT IMPLEMENTED YET')
+        print('LOOOLL YOU ENCOUNTERED THE MONSTER BUT THIS FUNCTIONALITY ISNT IMPLEMENTED YET')

@@ -23,7 +23,6 @@ gmPHASE = 'I'
 video_played = False
 flrprssd = (False,1,1)
 evnt = event(game)
-
 #LOOP
 while isGameRunning:
     #handling QUITS
@@ -50,7 +49,7 @@ while isGameRunning:
             video.preview()
 
             while current != flrprssd[1]:
-                video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'e_Countdown_'+str(current)+'_resized.mp4', audio= False)
+                video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'e_Countdown_'+str(current)+'.mp4', audio= False)
                 video.preview() 
                 if current > flrprssd[1]:
                     current = current-1
@@ -60,13 +59,19 @@ while isGameRunning:
             newfloorlevel = flrprssd[1] 
 
             game.setHotelFloor(newfloorlevel)
-            video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'e_Countdown_'+str(current)+'_resized.mp4', audio= False)
+            video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'e_Countdown_'+str(current)+'.mp4', audio= False)
             video.preview()
             
-            video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'e_BACKGROUND_DOORSOPEN_resized.mp4', audio= False)
+            video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'e_BACKGROUND_DOORSOPEN.mp4', audio= False)
             video.preview()
 
-            evnt.checkElevatorChoice(newfloorlevel)
+            if game.checkEndGameStatus():
+                print('YOU REACHED THE END OF THE GAME!!! YOU ENDED WITH:' +str(game.player.getLives()) + ' lives and ' +str(game.getKeyInventoryCount())+ ' keys')
+                isGameRunning = False
+
+            else:
+                evnt.checkElevatorChoice(newfloorlevel)
+
 
 
 

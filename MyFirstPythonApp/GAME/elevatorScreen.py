@@ -17,9 +17,13 @@ class elevatorScreen():
         self.showGameStatus = False
         self.game = GAME
 
+        #using this to check if the same floor is pressed
+        self.sameFloorPressed = False
+
+
     #updates SPRITES
     def update(self):
-        floorPRESSED = self.elevatorScreenBackground.update()
+        floorPRESSED = self.elevatorScreenBackground.update(self.sameFloorPressed)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_TAB]:
             self.showGameStatus = True
@@ -27,8 +31,14 @@ class elevatorScreen():
             self.showGameStatus = False
         
         if self.game.validateElevatorFloor(floorPRESSED):
+            self.sameFloorPressed = self.game.getIsSameFloorPressed() 
+
+            if self.sameFloorPressed:
+                return (False, floorPRESSED,self.game)
+            
             return (True, floorPRESSED,self.game)
         else:
+            self.sameFloorPressed = self.game.getIsSameFloorPressed() 
             return (False, floorPRESSED,self.game)
         
     #draws LEVEL to screen
@@ -36,7 +46,6 @@ class elevatorScreen():
         self.elevatorScreenBackground.draw(self.displaySurface)
         if self.showGameStatus:
             self.elevatorScreenGAMESTATUS.draw(self.displaySurface, self.game.getKeyInventoryCount(), self.game.player.getLives(), self.game.hotel.getFloor())
-        
     
     #will be called fom GAME loop
     def run(self):

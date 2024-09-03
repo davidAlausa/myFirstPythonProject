@@ -26,4 +26,12 @@ class elevatorScreenGAMESTATUS():
         elevatorscreen_FLOORLEVELSTAT = pygame.image.load(floor_level_stat_path).convert_alpha()
         elevatorscreen_FLOORLEVELSTAT = pygame.transform.scale(elevatorscreen_FLOORLEVELSTAT, (WINDOW_WIDTH, WINDOW_HEIGHT))
         displaySurface.blit(elevatorscreen_FLOORLEVELSTAT, (0, 0))
-                    
+
+        if numOfKey == 3:
+            elevatorscreen_MISSIONOBJECTIVE_ALLKEYSFOUND = pygame.image.load(SPRITESHEET_PATH + 'gs_TITLES_MISSIONOBJECTIVE_ALLKEYSFOUND.png').convert_alpha()
+            elevatorscreen_MISSIONOBJECTIVE_ALLKEYSFOUND = pygame.transform.scale(elevatorscreen_MISSIONOBJECTIVE_ALLKEYSFOUND, (WINDOW_WIDTH, WINDOW_HEIGHT))
+            displaySurface.blit(elevatorscreen_MISSIONOBJECTIVE_ALLKEYSFOUND, (0, 0))
+        else:
+            elevatorscreen_MISSIONOBJECTIVE_NOTALLKEYSFOUND = pygame.image.load(SPRITESHEET_PATH + 'gs_TITLES_MISSIONOBJECTIVE_NOTALLKEYSFOUND.png').convert_alpha()
+            elevatorscreen_MISSIONOBJECTIVE_NOTALLKEYSFOUND = pygame.transform.scale(elevatorscreen_MISSIONOBJECTIVE_NOTALLKEYSFOUND, (WINDOW_WIDTH, WINDOW_HEIGHT))
+            displaySurface.blit(elevatorscreen_MISSIONOBJECTIVE_NOTALLKEYSFOUND, (0, 0))

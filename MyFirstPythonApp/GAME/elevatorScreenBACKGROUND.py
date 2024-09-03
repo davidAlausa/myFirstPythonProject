@@ -25,6 +25,9 @@ class elevatorScreenBACKGROUND():
 
         self.elevatorscreen_BACKGROUND_5= pygame.image.load(SPRITESHEET_PATH + 'e_BACKGROUND_5.png').convert()
         self.elevatorscreen_BACKGROUND_5 = pygame.transform.scale(self.elevatorscreen_BACKGROUND_5, (WINDOW_WIDTH, WINDOW_HEIGHT))
+
+        self.elevatorscreen_BACKGROUND_SAMEFLOOR = pygame.image.load(SPRITESHEET_PATH + 'e_BACKGROUND_SAMEFLOOR.png').convert()
+        self.elevatorscreen_BACKGROUND_SAMEFLOOR = pygame.transform.scale(self.elevatorscreen_BACKGROUND_SAMEFLOOR, (WINDOW_WIDTH, WINDOW_HEIGHT))
         
         #rects for mouse hovering
         self.floorbutton_1_rect = pygame.Rect(position[0], position[1], position[2], position[3])
@@ -33,7 +36,8 @@ class elevatorScreenBACKGROUND():
         self.floorbutton_4_rect = pygame.Rect(position4[0], position4[1], position4[2], position4[3])
         self.floorbutton_5_rect = pygame.Rect(position5[0], position5[1], position5[2], position5[3])
 
-    def update(self):
+    def update(self, isSameFloorPressed):
+
         if self.floorbutton_1_rect.collidepoint(pygame.mouse.get_pos()):
             self.elevatorscreen_BACKGROUND = self.elevatorscreen_BACKGROUND_G
             if pygame.mouse.get_pressed()[0]:
@@ -56,9 +60,13 @@ class elevatorScreenBACKGROUND():
             if pygame.mouse.get_pressed()[0]:
                 return 5
         else:
-            self.elevatorscreen_BACKGROUND = self.elevatorscreen_BACKGROUND_NOTSELECTED
-            if pygame.mouse.get_pressed()[0]:
+            if isSameFloorPressed:
+                self.elevatorscreen_BACKGROUND = self.elevatorscreen_BACKGROUND_SAMEFLOOR
                 return 0
+            else:
+                self.elevatorscreen_BACKGROUND = self.elevatorscreen_BACKGROUND_NOTSELECTED
+        if pygame.mouse.get_pressed()[0]:
+            return 0
 
     def draw(self, displaySurface):
         displaySurface.blit(self.elevatorscreen_BACKGROUND, (0,0))
