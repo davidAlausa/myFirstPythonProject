@@ -1,6 +1,7 @@
 import pygame
 from Config import *
 from FUNCTIONALITY import Game
+import moviepy.editor 
 
 class elevatorScreenBACKGROUND():
     def __init__(self,position,position2,position3,position4,position5):
@@ -36,7 +37,7 @@ class elevatorScreenBACKGROUND():
         self.floorbutton_4_rect = pygame.Rect(position4[0], position4[1], position4[2], position4[3])
         self.floorbutton_5_rect = pygame.Rect(position5[0], position5[1], position5[2], position5[3])
 
-    def update(self, isSameFloorPressed):
+    def update(self):
 
         if self.floorbutton_1_rect.collidepoint(pygame.mouse.get_pos()):
             self.elevatorscreen_BACKGROUND = self.elevatorscreen_BACKGROUND_G
@@ -60,11 +61,7 @@ class elevatorScreenBACKGROUND():
             if pygame.mouse.get_pressed()[0]:
                 return 5
         else:
-            if isSameFloorPressed:
-                self.elevatorscreen_BACKGROUND = self.elevatorscreen_BACKGROUND_SAMEFLOOR
-                return 0
-            else:
-                self.elevatorscreen_BACKGROUND = self.elevatorscreen_BACKGROUND_NOTSELECTED
+            self.elevatorscreen_BACKGROUND = self.elevatorscreen_BACKGROUND_NOTSELECTED
         if pygame.mouse.get_pressed()[0]:
             return 0
 

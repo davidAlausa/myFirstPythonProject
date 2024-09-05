@@ -4,6 +4,7 @@ import string
 from Hotel import Hotel
 from Monster import Monster
 from Player import Player
+import moviepy.editor 
 
 class Game:
     def __init__(this):
@@ -23,26 +24,26 @@ class Game:
         this.CBLUE   = '\33[34m'    #BLUE
         this.CVIOLET = '\33[35m'    #VIOLET
         this.CBLINK    = '\33[5m' #BLINK
+
         this.isSameFloorPressed = False
 
     def checkEndGameStatus(this):
-        if this.player.getLives() > 0 and this.keyInventoryCount == 3 and this.hotel.getFloor() == 1:
+        if this.player.getPlayerLives() > 0 and this.keyInventoryCount == 3 and this.hotel.getFloor() == 1:
             return True
-        elif this.player.getLives() == 0:
+        elif this.player.getPlayerLives() == 0:
             return True
         else:
             return False
     
     def validateElevatorFloor(this, proposedFloor):
+        this.isSameFloorPressed = False
         currentFloor = this.hotel.getFloor() 
         if proposedFloor == currentFloor:
             this.isSameFloorPressed = True
             return False
         elif proposedFloor == 0 or proposedFloor == None:
             return False
-
         else:
-            this.isSameFloorPressed = False
             return True
 
     def keyFound(this):
@@ -54,7 +55,6 @@ class Game:
             if this.key == this.monster.floorLevel:
                 while this.key == this.monster.floorLevel:
                     this.key = random.randint(2,5)
-
 
     def monsterEvent(this):
         
@@ -124,6 +124,13 @@ class Game:
     
     def getMonsterFloorLevel(this):
         return this.monster.floorLevel
+    
+    def resetMonster(this):
+        this.monster.resetLives()
+        this.monster.moveMonster()
+        if this.monster.floorLevel == this.key:
+            while this.monster.floorLevel == this.key:
+                this.monster.moveMonster()
 
     def getKeyFloorLevel(this):
         return this.key
@@ -133,3 +140,15 @@ class Game:
 
     def getIsSameFloorPressed(this):
         return this.isSameFloorPressed
+    
+    def getPlayerLives(this):
+        return this.player.getPlayerLives()
+    
+    def setPlayerLives(this, newValue):
+        this.player.setPlayerLives(newValue)
+
+    def getMonsterLives(this):
+        return this.monster.getLives()
+    
+    def setMonsterLives(this, newValue):
+        this.monster.setLives(newValue)

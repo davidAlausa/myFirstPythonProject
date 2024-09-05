@@ -8,11 +8,10 @@ class Player:
         elif this.lives > 3:
             return False
 
-    def getLives(this):
+    def getPlayerLives(this):
         return this.lives
     
-    def setLives(this, change):
+    def setPlayerLives(this, change):
         this.lives = change
-        this.checkLives()
 
         

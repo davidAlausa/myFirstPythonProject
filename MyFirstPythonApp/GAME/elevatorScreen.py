@@ -3,7 +3,7 @@ from Config import *
 from elevatorScreenBACKGROUND import elevatorScreenBACKGROUND
 from elevatorScreenGAMESTATUS import elevatorScreenGAMESTATUS
 from FUNCTIONALITY import Game
-
+import moviepy.editor 
 
 class elevatorScreen():
     def __init__(self,displaySurface,GAME):
@@ -15,37 +15,32 @@ class elevatorScreen():
         self.displaySurface = displaySurface
         #using this to check if TAB is being held down
         self.showGameStatus = False
-        self.game = GAME
 
-        #using this to check if the same floor is pressed
-        self.sameFloorPressed = False
+        self.game = GAME
 
 
     #updates SPRITES
     def update(self):
-        floorPRESSED = self.elevatorScreenBackground.update(self.sameFloorPressed)
+        floorPRESSED = self.elevatorScreenBackground.update()
         keys = pygame.key.get_pressed()
         if keys[pygame.K_TAB]:
             self.showGameStatus = True
         else:
             self.showGameStatus = False
         
-        if self.game.validateElevatorFloor(floorPRESSED):
-            self.sameFloorPressed = self.game.getIsSameFloorPressed() 
-
-            if self.sameFloorPressed:
-                return (False, floorPRESSED,self.game)
-            
+        if self.game.validateElevatorFloor(floorPRESSED):            
             return (True, floorPRESSED,self.game)
         else:
-            self.sameFloorPressed = self.game.getIsSameFloorPressed() 
+            if self.game.isSameFloorPressed:
+                video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'e_BACKGROUND_SAMEFLOOR.mp4', audio= False)
+                video.preview()
             return (False, floorPRESSED,self.game)
         
     #draws LEVEL to screen
     def draw(self):
         self.elevatorScreenBackground.draw(self.displaySurface)
         if self.showGameStatus:
-            self.elevatorScreenGAMESTATUS.draw(self.displaySurface, self.game.getKeyInventoryCount(), self.game.player.getLives(), self.game.hotel.getFloor())
+            self.elevatorScreenGAMESTATUS.draw(self.displaySurface, self.game.getKeyInventoryCount(), self.game.getPlayerLives(), self.game.hotel.getFloor())
     
     #will be called fom GAME loop
     def run(self):
