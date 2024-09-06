@@ -95,14 +95,13 @@ class monsterScreenATTACKBOARD():
         if self.rectP1.colliderect(smallerRectHI):
             self.game.setPlayerLives(self.game.getPlayerLives() - 1)
             self.reset()
-            print(str(self.game.getPlayerLives()))
 
         elif self.rectP1.colliderect(smallerRectAI):
             self.game.setMonsterLives(self.game.getMonsterLives() - 1)
-            video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'me_MONSTERHURT_'+ str(random.randint(1,5)) +'.mp4', audio= False)
-            video.preview()
-            self.reset()
-            print(str(self.game.getMonsterLives()))
+            if self.game.getMonsterLives() != 0:
+                video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'me_MONSTERHURT_'+ str(random.randint(1,5)) +'.mp4', audio= False)
+                video.preview()
+                self.reset()
 
 
         if self.game.getPlayerLives() == 0 :

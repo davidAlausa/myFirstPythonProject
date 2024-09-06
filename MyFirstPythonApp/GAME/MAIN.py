@@ -26,7 +26,7 @@ video_played = False
 flrprssd = (False,1,1)
 evnt = event(game, displaySurface)
 
-print('THE MONSTER IS ON FLOOR:'+str(game.getMonsterFloorLevel())+' \tTHE KEY IS ON FLOOR:' + str(game.getKeyFloorLevel()))
+#print('THE MONSTER IS ON FLOOR:'+str(game.getMonsterFloorLevel())+' \tTHE KEY IS ON FLOOR:' + str(game.getKeyFloorLevel()))
 #LOOP
 while isGameRunning:
     #handling QUITS
