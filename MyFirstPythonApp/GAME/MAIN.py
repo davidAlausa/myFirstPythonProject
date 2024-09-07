@@ -6,6 +6,7 @@ from elevatorScreen import elevatorScreen
 from FUNCTIONALITY import Game
 from event import event
 from monsterScreen import monsterScreen
+from instructionsScreen import instructionsScreen
 
 #initialising PYGAME
 pygame.init()
@@ -18,7 +19,9 @@ pygame.display.set_caption('MonsterHotel')
 #initialising VARIABLES
 game = Game()
 intrscrn = introScreen(displaySurface)
+instructscrn = instructionsScreen(displaySurface)
 elvtrscrn = elevatorScreen(displaySurface,game)
+mnstrscrn = monsterScreen(displaySurface, game)   
 mnstrscrn = monsterScreen(displaySurface, game)   
 isGameRunning = True
 gmPHASE = 'I'
@@ -29,7 +32,7 @@ evnt = event(game, displaySurface)
 #print('THE MONSTER IS ON FLOOR:'+str(game.getMonsterFloorLevel())+' \tTHE KEY IS ON FLOOR:' + str(game.getKeyFloorLevel()))
 #LOOP
 while isGameRunning:
-    #handling QUITS
+#    #handling QUITS
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             isGameRunning = False
@@ -39,7 +42,10 @@ while isGameRunning:
 
         #deciding GAME'S PHASE
     if gmPHASE == 'I':
+        
         gmPHASE = intrscrn.run()
+    elif gmPHASE == 'INS':
+        gmPHASE = instructscrn.run(displaySurface)
     elif gmPHASE == 'P':
         if not video_played:
             video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'is_to_hs.mp4', audio= False)
@@ -69,7 +75,8 @@ while isGameRunning:
             video.preview()
 
             if game.checkEndGameStatus():
-                print('YOU REACHED THE END OF THE GAME!!! YOU ENDED WITH:' +str(game.getPlayerLives()) + ' lives and ' +str(game.getKeyInventoryCount())+ ' keys')
+                video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'YOUWIN.mp4', audio= False)
+                video.preview()
                 isGameRunning = False
 
             else:

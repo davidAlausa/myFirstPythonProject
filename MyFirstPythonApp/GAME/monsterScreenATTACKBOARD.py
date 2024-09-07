@@ -25,7 +25,7 @@ class monsterScreenATTACKBOARD():
         self.imageP1 = self.monsterEvent_ATTACKBOARD_P1.subsurface(pygame.Rect(0,0,50,50))
 
         self.oovPosition = (120,335)
-        self.P1InitialPosition = (235,460)
+        self.P1InitialPosition = (270,431)
 
         self.rectHI = self.imageHI.get_rect(bottomleft = self.oovPosition)
         self.rectAI = self.imageAI.get_rect(bottomleft = self.oovPosition)
@@ -36,8 +36,11 @@ class monsterScreenATTACKBOARD():
         self.isHarmful = False
 
         self.game = game
+        self.iterations = 0
 
     def update(self):
+        self.iterations = self.iterations + 1
+
         pressed_keys = pygame.key.get_pressed()
         if self.rectP1.top > 335:
             if pressed_keys[K_UP]:
@@ -72,21 +75,41 @@ class monsterScreenATTACKBOARD():
         pick = random.randint(1, 4)
         self.ItemThrown = True 
         if pick == 1:
-            rect.centerx = random.randint(120, 390)
-            rect.centery = 335
-            self.ItemVelocity = [random.choice([-2, -1, 1, 2]), random.choice([-2, -1, 1, 2])]
+            rect.centerx = random.randint(70, 440)
+            rect.centery = 285
+            if self.iterations < 500:
+                self.ItemVelocity = [random.choice([-2, -1, 1, 2]), random.choice([-2, -1, 1, 2])]
+            elif self.iterations < 1500:
+                self.ItemVelocity = [random.choice([-3, -2, 2, 3]), random.choice([-3, -2, 2, 3])]
+            else:
+                self.ItemVelocity = [random.choice([-4, -3, 3, 4]), random.choice([-4, -3, 3, 4])]
         elif pick == 2:
-            rect.centerx = random.randint(120, 390)
-            rect.centery = 505
-            self.ItemVelocity = [random.choice([-2, -1, 1, 2]), random.choice([-2, -1, 1, 2])]
+            rect.centerx = random.randint(70, 440)
+            rect.centery = 555
+            if self.iterations < 500:
+                self.ItemVelocity = [random.choice([-2, -1, 1, 2]), random.choice([-2, -1, 1, 2])]
+            elif self.iterations < 1500:
+                self.ItemVelocity = [random.choice([-3, -2, 2, 3]), random.choice([-3, -2, 2, 3])]
+            else:
+                self.ItemVelocity = [random.choice([-4, -3, 3, 4]), random.choice([-4, -3, 3, 4])]
         elif pick == 3:
-            rect.centerx = 120
-            rect.centery =  random.randint(335, 505)
-            self.ItemVelocity = [random.choice([1, 2]), random.choice([-2, -1, 1, 2])]
+            rect.centerx = 70
+            rect.centery =  random.randint(285, 555)
+            if self.iterations < 500:
+                self.ItemVelocity = [random.choice([1, 2]), random.choice([-2, -1, 1, 2])]
+            elif self.iterations < 1500:
+                self.ItemVelocity = [random.choice([2, 3]), random.choice([-3, -2, 2, 3])]
+            else:
+                self.ItemVelocity = [random.choice([3, 4]), random.choice([-4, -3, 3, 4])]
         elif pick == 4:
-            rect.centerx = 390
-            rect.centery =  random.randint(335, 505)
-            self.ItemVelocity = [random.choice([-2, -1]), random.choice([-2, -1, 1, 2])]
+            rect.centerx = 440
+            rect.centery =  random.randint(285, 555)
+            if self.iterations < 500:
+                self.ItemVelocity = [random.choice([1, 2]), random.choice([-2, -1, 1, 2])]
+            elif self.iterations < 1500:
+                self.ItemVelocity = [random.choice([2, 3]), random.choice([-3, -2, 2, 3])]
+            else:
+                self.ItemVelocity = [random.choice([3, 4]), random.choice([-4, -3, 3, 4])]
                                             
                                 
     def didCollide (self):
@@ -94,6 +117,8 @@ class monsterScreenATTACKBOARD():
         smallerRectAI = self.rectAI.inflate(-40, -40)
         if self.rectP1.colliderect(smallerRectHI):
             self.game.setPlayerLives(self.game.getPlayerLives() - 1)
+            video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'me_PLAYERHURT.mp4', audio= False)
+            video.preview()
             self.reset()
 
         elif self.rectP1.colliderect(smallerRectAI):
@@ -115,7 +140,7 @@ class monsterScreenATTACKBOARD():
         rect.move_ip(self.ItemVelocity[0], self.ItemVelocity[1])
 
         #if not (120 <= rect.left) or not (335 <= rect.top) or not (rect.right <= 390) or not (rect.bottom <= 505):
-        if not (150 <= rect.centerx <= 390) or not (360 <= rect.centery <= 505):
+        if not (100 <= rect.centerx <= 440) or not (310 <= rect.centery <= 555):
             rect.center = self.oovPosition
             self.ItemThrown = False
     def reset(self):

@@ -14,9 +14,15 @@ class introScreen():
 
     #updates SPRITES
     def update(self):
+        
+
         NEWGAME_PRESSED = self.introScreenNEWGAME.update(self)
+        INSTRUCTIONS_PRESSED = self.introScreenBackground.update()
+        
         if NEWGAME_PRESSED:
             return 'P'
+        elif INSTRUCTIONS_PRESSED:
+            return 'INS'
         else:
             return 'I'
     

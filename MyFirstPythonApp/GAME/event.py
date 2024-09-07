@@ -28,7 +28,11 @@ class event():
                 return 'P'
         
         else:
-            self.emptyFloor()
+            if choice !=1:
+                self.emptyFloor()
+            else:
+                video = moviepy.editor.VideoFileClip(SPRITESHEET_PATH + 'f_GROUND.mp4', audio= False)
+                video.preview()
             return 'P'
 
 
